@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Valentine</title>
+
+  <style>
+    body {
+      font-family: Georgia, serif;
+      text-align: center;
+      background-color: #6d071a;
+      color: rgb(255, 255, 255);
+      padding-top: 80px;
+    }
+
+    h1 {
+      font-weight: bold;
+      font-size: 60px;
+    }
+
+    button {
+      padding: 12px 22px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.6s ease;
+    }
+
+    #yesBtn {
+      background-color: #3c080f;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #bbb;
+    }
+
+    img {
+      margin-top: 20px;
+      width: 280px;
+      border-radius: 14px;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Hey Billy, will you be my Valentine?</h1>
+
+<button id="yesBtn" onclick="showYes()">Yes</button>
+<button id="noBtn" onclick="fadeNo()">No</button>
+
+<div id="response"></div>
+
+<img id="photo" src="photo.jpg">
+<audio id="song" src="song.mp3"></audio>
+
+<script>
+function showYes() {
+  document.getElementById("response").innerHTML =
+    "That's right — you're mine ❤️";
+
+  document.getElementById("photo").style.display = "block";
+  document.getElementById("song").play();
+}
+
+function fadeNo() {
+  document.getElementById("response").innerHTML =
+    "Bold of you to assume you had a choice — it's still a yes baby 😌";
+
+  document.getElementById("noBtn").style.opacity = "0";
+}
+</script>
+
+</body>
+</html>
