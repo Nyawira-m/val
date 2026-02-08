@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Yes, You're Mine!</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      text-align: center;
+      background-color: #6d071a;
+      color: white;
+      overflow: hidden;
+      position: relative;
+      padding-top: 80px;
+    }
+
+    h1 {
+      font-size: 32px;
+    }
+
+    .balloon, .confetti, .heart {
+      position: absolute;
+      font-size: 24px;
+    }
+
+    .balloon { animation: floatUp 4s linear forwards; bottom: -100px; }
+    @keyframes floatUp { from {transform: translateY(0); opacity:1;} to {transform: translateY(-800px); opacity:0;} }
+
+    .confetti { top:0; animation: fall 2s linear forwards; }
+    @keyframes fall { from {transform: translateY(-50px); opacity:1;} to {transform: translateY(600px); opacity:0;} }
+
+    .heart { animation: heartFloat linear forwards; }
+    @keyframes heartFloat { from {transform: translateY(0); opacity:1;} to {transform: translateY(-800px); opacity:0;} }
+  </style>
+</head>
+<body>
+
+<h1>That's right — you're mine ❤️</h1>
+
+<audio id="song" src="song.mp3" autoplay></audio>
+
+<script>
+// Confetti
+function confettiBurst() {
+  for(let i=0;i<40;i++){
+    let confetti=document.createElement("div");
+    confetti.className="confetti";
+    confetti.innerHTML="✨";
+    confetti.style.left=Math.random()*window.innerWidth+"px";
+    confetti.style.animationDuration=(1+Math.random()*1)+"s";
+    document.body.appendChild(confetti);
+    setTimeout(()=>confetti.remove(),2000);
+  }
+}
+
+// Balloons
+function launchBalloons(){
+  for(let i=0;i<20;i++){
+    let balloon=document.createElement("div");
+    balloon.className="balloon";
+    balloon.innerHTML="🎈";
+    balloon.style.left=Math.random()*window.innerWidth+"px";
+    balloon.style.animationDuration=(3+Math.random()*2)+"s";
+    document.body.appendChild(balloon);
+    setTimeout(()=>balloon.remove(),4000);
+  }
+}
+
+// Hearts
+function startHearts(){
+  const duration = 10000;
+  const intervalTime = 300;
+  const heartInterval = setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*window.innerWidth+"px";
+    heart.style.fontSize=(16+Math.random()*20)+"px";
+    heart.style.animationDuration=(3+Math.random()*2)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),5000);
+  },intervalTime);
+  setTimeout(()=>clearInterval(heartInterval),duration);
+}
+
+confettiBurst();
+launchBalloons();
+startHearts();
+</script>
+
+</body>
+</html>

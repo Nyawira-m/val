@@ -2,19 +2,20 @@
 <html>
 <head>
   <title>Valentine</title>
-
   <style>
     body {
       font-family: Georgia, serif;
       text-align: center;
       background-color: #6d071a;
-      color: rgb(255, 255, 255);
+      color: white;
       padding-top: 80px;
+      overflow: hidden;
+      position: relative;
     }
 
     h1 {
-      font-weight: bold;
-      font-size: 60px;
+      font-weight: normal;
+      font-size: 32px;
     }
 
     button {
@@ -24,11 +25,11 @@
       border-radius: 10px;
       border: none;
       cursor: pointer;
-      transition: opacity 0.6s ease;
+      transition: opacity 0.6s ease, transform 0.3s ease;
     }
 
     #yesBtn {
-      background-color: #3c080f;
+      background-color: #ff4d6d;
       color: white;
     }
 
@@ -36,41 +37,55 @@
       background-color: #bbb;
     }
 
-    img {
-      margin-top: 20px;
-      width: 280px;
+    .splash-photo {
+      position: absolute;
+      width: 150px;
       border-radius: 14px;
-      display: none;
+      opacity: 1;
+      transition: opacity 1s ease;
+      pointer-events: none;
     }
   </style>
 </head>
-
 <body>
 
 <h1>Hey Billy, will you be my Valentine?</h1>
 
-<button id="yesBtn" onclick="showYes()">Yes</button>
-<button id="noBtn" onclick="fadeNo()">No</button>
-
-<div id="response"></div>
-
-<img id="photo" src="photo.jpg">
-<audio id="song" src="song.mp3"></audio>
+<button id="yesBtn" onclick="goYes()">Yes</button>
+<button id="noBtn" onclick="goNo()">No</button>
 
 <script>
-function showYes() {
-  document.getElementById("response").innerHTML =
-    "That's right — you're mine ❤️";
+const photos = ["meandbilly1.jpg", "meandbilly2.jpg", "meandbilly3.jpg"]; // Add more if you want
 
-  document.getElementById("photo").style.display = "block";
-  document.getElementById("song").play();
+function splashPhotos() {
+  const duration = 5000; // splash duration
+  const intervalTime = 400;
+
+  const interval = setInterval(() => {
+    const src = photos[Math.floor(Math.random() * photos.length)];
+    const img = document.createElement("img");
+    img.src = src;
+    img.className = "splash-photo";
+    img.style.top = Math.random() * (window.innerHeight - 200) + "px";
+    img.style.left = Math.random() * (window.innerWidth - 200) + "px";
+    document.body.appendChild(img);
+    setTimeout(() => {
+      img.style.opacity = "0";
+      setTimeout(() => img.remove(), 1000);
+    }, 1000);
+  }, intervalTime);
+
+  setTimeout(() => clearInterval(interval), duration);
 }
 
-function fadeNo() {
-  document.getElementById("response").innerHTML =
-    "Bold of you to assume you had a choice — it's still a yes baby 😌";
+splashPhotos();
 
-  document.getElementById("noBtn").style.opacity = "0";
+function goYes() {
+  window.location.href = "yes.html";
+}
+
+function goNo() {
+  window.location.href = "no.html";
 }
 </script>
 
